@@ -31,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-5.x": "5.4-dev"
+            "dev-5.x": "5.x-ca-regex-fix"
         }
     }
 }
