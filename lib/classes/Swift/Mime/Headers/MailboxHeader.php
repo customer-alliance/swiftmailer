@@ -277,9 +277,7 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      */
     protected function createDisplayNameString($displayName, $shorten = false)
     {
-        return $this->createPhrase($this, $displayName,
-            $this->getCharset(), $this->getEncoder(), $shorten
-            );
+        return $this->createPhrase($displayName, $shorten);
     }
 
     /**
@@ -302,13 +300,15 @@ class Swift_Mime_Headers_MailboxHeader extends Swift_Mime_Headers_AbstractHeader
      * Commas and semicolons are used to separate
      * multiple addresses, and should therefore be encoded
      *
+     * Quotes and colons must also be encoded.
+     *
      * @param string $token
      *
      * @return bool
      */
     protected function tokenNeedsEncoding($token)
     {
-        return preg_match('/[,;]/', $token) || parent::tokenNeedsEncoding($token);
+        return preg_match('/[,;":]/', $token) || parent::tokenNeedsEncoding($token);
     }
 
     /**

@@ -102,9 +102,7 @@ class Swift_Mime_Headers_UnstructuredHeader extends Swift_Mime_Headers_AbstractH
     public function getFieldBody()
     {
         if (!$this->getCachedValue()) {
-            $this->setCachedValue(
-                $this->encodeWords($this, $this->_value)
-                );
+            $this->setCachedValue($this->encodeWords($this->_value));
         }
 
         return $this->getCachedValue();
