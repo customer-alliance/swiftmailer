@@ -307,6 +307,21 @@ class Swift_Mime_Headers_MailboxHeaderTest extends \SwiftMailerTestCase
             );
     }
 
+    public function testSetValidAddressWithSpecialChars()
+    {
+        $header = $this->_getHeader('From', $this->_getEncoder('Q', true));
+        $header->setAddresses(['valid@email.com', 'àlso@vàlid.com']);
+    }
+
+    /**
+     * @expectedException Swift_RfcComplianceException
+     */
+    public function testSetInvalidEmailAddress()
+    {
+        $header = $this->_getHeader('From', $this->_getEncoder('Q', true));
+        $header->setAddresses(['invalid']);
+    }
+
     private function _getHeader($name, $encoder)
     {
         $header = new Swift_Mime_Headers_MailboxHeader($name, $encoder, new Swift_Mime_Grammar());
